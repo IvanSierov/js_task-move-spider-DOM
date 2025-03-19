@@ -7,18 +7,18 @@ document.addEventListener('click', (e) => {
   const wallRect = wall.getBoundingClientRect();
   const spiderRect = spider.getBoundingClientRect();
 
+  const borderWidth = parseFloat(window.getComputedStyle(wall).borderLeftWidth);
+
   const clickX = e.clientX;
   const clickY = e.clientY;
 
-  let newLeft = clickX - wallRect.left - spiderRect.width / 2;
-  let newTop = clickY - wallRect.top - spiderRect.height / 2;
-
-  const widthBorder =
-    parseFloat(window.getComputedStyle(wall).borderLeftWidth) * 2;
+  let newLeft = clickX - wallRect.left - spiderRect.width / 2 - borderWidth;
+  let newTop = clickY - wallRect.top - spiderRect.height / 2 - borderWidth;
 
   const minCoord = 0;
-  const maxCoordX = wallRect.width - spiderRect.width - widthBorder;
-  const maxCoordY = wallRect.height - spiderRect.height - widthBorder;
+
+  const maxCoordX = wallRect.width - spiderRect.width - borderWidth * 2;
+  const maxCoordY = wallRect.height - spiderRect.height - borderWidth * 2;
 
   newLeft = Math.max(minCoord, Math.min(newLeft, maxCoordX));
   newTop = Math.max(minCoord, Math.min(newTop, maxCoordY));
